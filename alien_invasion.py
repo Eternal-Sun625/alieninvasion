@@ -9,11 +9,11 @@ from scoreboard import Scoreboard
 import game_functions as gf
 
 
-pygame.mixer.init()
-pygame.mixer_music.load('music/bg_music.wav')
-pygame.mixer_music.play()
 def run_game():
     # Initialize pygame, settings, and screen object.
+    pygame.mixer.init()
+    pygame.mixer_music.load('music/bg_music.wav')
+
     pygame.init()
     ai_settings = Settings()
     screen = pygame.display.set_mode(
@@ -49,6 +49,9 @@ def run_game():
             gf.update_aliens(ai_settings,  screen,stats,sb, ship, aliens, bullets)
         
         gf.update_screen(ai_settings, screen, stats,sb,ship, aliens, bullets,play_button)
+
+        while not pygame.mixer_music.get_busy():
+            pygame.mixer_music.play()
 
 
 run_game()
